@@ -1,8 +1,29 @@
-# data and artifacts
+# data and training artifacts
 data/
 adapters/
 model/
 
 # python
 __pycache__/
+*.py[cod]
+*.egg-info/
 .venv/
+venv/
+build/
+dist/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# tooling / environments
+.env
+.env.*
+.idea/
+.vscode/
+.DS_Store
+
+# agentready local reports
+.agentready/

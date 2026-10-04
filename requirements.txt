@@ -1,0 +1,11 @@
+# Pinned development/tooling environment (Python 3.11+).
+# Regenerate with: python3 -m pip freeze | grep -E "^(pytest|ruff|mypy|bandit|black|isort|structlog|pip-audit)"
+black==26.5.1
+bandit==1.9.4
+isort==9.0.2
+mypy==2.4.0
+pip-audit==2.10.1
+pytest==9.0.3
+pytest-cov==7.1.0
+ruff==0.16.10
+structlog==26.1.0

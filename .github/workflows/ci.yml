@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dev dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Lint (ruff, incl. security rules)
+        run: ruff check src tests
+
+      - name: Format check (black, isort)
+        run: |
+          black --check src tests
+          isort --check-only --profile black src tests
+
+      - name: Type check (mypy)
+        run: mypy src
+
+      - name: Security scan (bandit)
+        run: bandit -c pyproject.toml -r src
+
+      - name: Dependency audit (pip-audit)
+        run: pip-audit -r requirements.txt --strict
+
+      - name: Tests with coverage
+        run: python3 -m pytest --cov=local_decision_model --cov-report=term-missing --cov-fail-under=80

@@ -71,7 +71,7 @@ Full FT of a 4B model needs ~16–20 bytes/param (weights + gradients + AdamW fp
 
 - `blog/` contains the article and LinkedIn teaser this repo backs — numbers there are pre-run estimates until the pipeline has been executed end-to-end; update them with measured results.
 - `data/`, `adapters/`, `model/` are gitignored — only code is versioned.
-- Dataset proportions live in `scripts/02_build_dataset.py` (`BUILDERS` dict); swap in your own domain mix there.
+- Dataset proportions live in `src/local_decision_model/build_dataset.py` (`BUILDERS` dict); swap in your own domain mix there.
 - The dev split doubles as the eval set; keep it held out from training.
 - Data build needs `pip install datasets` on a networked machine; training needs `pip install mlx-lm` on Apple Silicon.
 

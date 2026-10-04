@@ -10,6 +10,11 @@ import time
 import urllib.request
 from collections import defaultdict
 from pathlib import Path
+from typing import Any
+
+import structlog
+
+logger = structlog.get_logger()
 
 BASE_URL = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8080/v1/chat/completions"
 MODEL = sys.argv[2] if len(sys.argv) > 2 else "my-jev-4b"
@@ -21,20 +26,22 @@ SYSTEM_PROMPT = (
 )
 
 
-def query(rec):
+def query(rec: dict[str, Any]) -> tuple[str, float]:
+    """Send one decision task to the local server; return (raw output, latency)."""
     options = "\n".join(f"{o['label']}. {o['key']} - {o['description']}" for o in rec["options"])
     user = f"state: {rec['state']}\nquestion: {rec['question']}\noptions:\n{options}"
-    body = json.dumps({
-        "model": MODEL,
-        "temperature": 0,
-        "max_tokens": 8,
-        "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user},
-        ],
-    }).encode()
-    req = urllib.request.Request(BASE_URL, data=body,
-                                 headers={"Content-Type": "application/json"})
+    body = json.dumps(
+        {
+            "model": MODEL,
+            "temperature": 0,
+            "max_tokens": 8,
+            "messages": [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user},
+            ],
+        }
+    ).encode()
+    req = urllib.request.Request(BASE_URL, data=body, headers={"Content-Type": "application/json"})
     start = time.time()
     with urllib.request.urlopen(req) as resp:
         out = json.loads(resp.read())
@@ -42,10 +49,11 @@ def query(rec):
     return out["choices"][0]["message"]["content"].strip(), latency
 
 
-def main():
-    recs = [json.loads(l) for l in open(DEV)]
-    correct = defaultdict(int)
-    total = defaultdict(int)
+def main() -> None:
+    """Evaluate every dev record and print per-source accuracy and latency."""
+    recs = [json.loads(line) for line in open(DEV)]
+    correct: defaultdict[str, int] = defaultdict(int)
+    total: defaultdict[str, int] = defaultdict(int)
     malformed = 0
     latencies = []
 
@@ -62,9 +70,9 @@ def main():
         if not ok:
             ok = raw.startswith(expected)  # bare-letter output
         total[rec["source"]] += 1
-        correct[rec["source"]] += ok
+        correct[rec["source"]] += int(ok)
         if (i + 1) % 200 == 0:
-            print(f"{i + 1}/{len(recs)} ...")
+            logger.info("eval-progress", done=i + 1, total=len(recs))
 
     print(f"\n{'source':<12} {'acc':>7} {'n':>6}")
     overall_c = overall_n = 0
@@ -73,9 +81,22 @@ def main():
         overall_c += correct[source]
         overall_n += total[source]
         print(f"{source:<12} {acc:>7.1%} {total[source]:>6}")
+        logger.info(
+            "eval-source",
+            source=source,
+            accuracy=round(acc, 4),
+            n=total[source],
+        )
     print(f"{'OVERALL':<12} {overall_c / overall_n:>7.1%} {overall_n:>6}")
     print(f"malformed outputs: {malformed} ({malformed / overall_n:.2%})")
     print(f"mean latency: {sum(latencies) / len(latencies):.3f}s")
+    logger.info(
+        "eval-summary",
+        accuracy=round(overall_c / overall_n, 4),
+        n=overall_n,
+        malformed=malformed,
+        mean_latency_s=round(sum(latencies) / len(latencies), 4),
+    )
 
 
 if __name__ == "__main__":
