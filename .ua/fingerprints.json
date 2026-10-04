@@ -1,0 +1,618 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "7c7012d66b34716c64b019401cf6603759649852",
+  "generatedAt": "2026-10-04T14:11:29.793Z",
+  "files": {
+    ".github/ISSUE_TEMPLATE/bug_report.md": {
+      "filePath": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "contentHash": "f3f76e1c94b2d3960b4846456cecd76c6a6ce4f967481f0774a4a58973ffa3f7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 29,
+      "hasStructuralAnalysis": false
+    },
+    ".github/ISSUE_TEMPLATE/feature_request.md": {
+      "filePath": ".github/ISSUE_TEMPLATE/feature_request.md",
+      "contentHash": "07f4d0b172dacda98696870801337e291e7941e73bac0ac5784b479399d63383",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 22,
+      "hasStructuralAnalysis": false
+    },
+    ".github/PULL_REQUEST_TEMPLATE.md": {
+      "filePath": ".github/PULL_REQUEST_TEMPLATE.md",
+      "contentHash": "82800884e2dbf9df6f307d0971e0ff83db1417e160db1da92f5f200132dcc32a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 22,
+      "hasStructuralAnalysis": false
+    },
+    ".github/dependabot.yml": {
+      "filePath": ".github/dependabot.yml",
+      "contentHash": "e355c2fd8769e2be7ea27a63ea574fa64dd24254d92ddd547456b53712283ccd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    ".github/workflows/ci.yml": {
+      "filePath": ".github/workflows/ci.yml",
+      "contentHash": "0d0abbaac0da2a6b7c98827eb963589df53649c583d63f2b54560e7ef561247b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": false
+    },
+    ".pre-commit-config.yaml": {
+      "filePath": ".pre-commit-config.yaml",
+      "contentHash": "a1b7e5e520fc368428cedbfbc9dc683eebc05897fd8be0dddd612e9a0df60e26",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 45,
+      "hasStructuralAnalysis": false
+    },
+    "AGENTS.md": {
+      "filePath": "AGENTS.md",
+      "contentHash": "ff539db803f1d7e2df696999a69558948bf4a5b25948b2d1b440c3564776b758",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 87,
+      "hasStructuralAnalysis": false
+    },
+    "Makefile": {
+      "filePath": "Makefile",
+      "contentHash": "347f4932faed367d5e8ad798e152d3c820e94b556209b504751d963cee17036d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 50,
+      "hasStructuralAnalysis": false
+    },
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "01e6559ce264d2d0cb628d0b0775a5035cd63c74762a2383f43c229bb445abea",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 81,
+      "hasStructuralAnalysis": false
+    },
+    "SECURITY.md": {
+      "filePath": "SECURITY.md",
+      "contentHash": "7db1a9cafd00e68e7fb127bab7c7c8d4b8e66c7011b803cc3e57ef6ddd6e94da",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": false
+    },
+    "THREAT_MODEL.md": {
+      "filePath": "THREAT_MODEL.md",
+      "contentHash": "853c3892e13b0503a7686e4ed0d1c02cb1b56a89c46f0dd537d1b8b084ffe373",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 35,
+      "hasStructuralAnalysis": false
+    },
+    "blog/linkedin-post.md": {
+      "filePath": "blog/linkedin-post.md",
+      "contentHash": "b6fd57ba8bb322ec62394fada6404cc5c98260abef71dc83a2724d869a072709",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 27,
+      "hasStructuralAnalysis": false
+    },
+    "blog/local-jev-mac-mini.md": {
+      "filePath": "blog/local-jev-mac-mini.md",
+      "contentHash": "4d6d31cb371f687d70ba2bb14ac1b818b53252508ddff66333eca203a99529fd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 156,
+      "hasStructuralAnalysis": false
+    },
+    "docs/adr/0001-mlx-lora-on-apple-silicon.md": {
+      "filePath": "docs/adr/0001-mlx-lora-on-apple-silicon.md",
+      "contentHash": "72cdc0a1709b4bd9937557967f9ac16be99746896e039626e51d402ed50645bc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 36,
+      "hasStructuralAnalysis": false
+    },
+    "docs/adr/0002-unified-schema-and-baked-system-prompt.md": {
+      "filePath": "docs/adr/0002-unified-schema-and-baked-system-prompt.md",
+      "contentHash": "19baa789149a8923efa83ad0dccf81d98c0a6ba06f005a7956ac9e2b4eb5a235",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 38,
+      "hasStructuralAnalysis": false
+    },
+    "docs/design.md": {
+      "filePath": "docs/design.md",
+      "contentHash": "37dc0960e5c0bf819bb3f58e40676609b61cef998c155de600479246e4af381e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 51,
+      "hasStructuralAnalysis": false
+    },
+    "pyproject.toml": {
+      "filePath": "pyproject.toml",
+      "contentHash": "5eb87b0542e6d5dd355fc627157e8010f5ff3c6ddd47985dfe743674a01a01a3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 70,
+      "hasStructuralAnalysis": false
+    },
+    "requirements.txt": {
+      "filePath": "requirements.txt",
+      "contentHash": "1bf4376306ad1727779a04ad6db7ef8742b4417551c1c1ff9f05592e95cf6f85",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 12,
+      "hasStructuralAnalysis": false
+    },
+    "scripts/04_train.sh": {
+      "filePath": "scripts/04_train.sh",
+      "contentHash": "174143629e24159288e22a8558cab287065caafe95d59deb6134090eb5f9f7ef",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 22,
+      "hasStructuralAnalysis": false
+    },
+    "scripts/05_fuse_serve.sh": {
+      "filePath": "scripts/05_fuse_serve.sh",
+      "contentHash": "c6f04c8cfaf37fb45de04f85e08b7565c51c8677ebf263381ae82f48df2751b4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": false
+    },
+    "src/local_decision_model/__init__.py": {
+      "filePath": "src/local_decision_model/__init__.py",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": true
+    },
+    "src/local_decision_model/build_dataset.py": {
+      "filePath": "src/local_decision_model/build_dataset.py",
+      "contentHash": "5170d8c6576872ce117fc296a4ceb2fcfdd4517570bd2759df1dbdb5161691bd",
+      "functions": [
+        {
+          "name": "opt",
+          "params": [
+            "label",
+            "key",
+            "description"
+          ],
+          "returnType": "dict[str, str]",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "rec",
+          "params": [
+            "state",
+            "question",
+            "options",
+            "answer",
+            "source"
+          ],
+          "returnType": "dict[str, Any]",
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "multinli",
+          "params": [
+            "n",
+            "rng"
+          ],
+          "returnType": "Iterator[dict[str, Any]]",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "boolq",
+          "params": [
+            "n",
+            "rng"
+          ],
+          "returnType": "Iterator[dict[str, Any]]",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "banking77",
+          "params": [
+            "n",
+            "rng"
+          ],
+          "returnType": "Iterator[dict[str, Any]]",
+          "exported": true,
+          "lineCount": 20
+        },
+        {
+          "name": "agnews",
+          "params": [
+            "n",
+            "rng"
+          ],
+          "returnType": "Iterator[dict[str, Any]]",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "sst5",
+          "params": [
+            "n",
+            "rng"
+          ],
+          "returnType": "Iterator[dict[str, Any]]",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "programmatic_policies",
+          "params": [
+            "n",
+            "rng"
+          ],
+          "returnType": "Iterator[dict[str, Any]]",
+          "exported": true,
+          "lineCount": 40
+        },
+        {
+          "name": "routing",
+          "params": [
+            "n",
+            "rng"
+          ],
+          "returnType": "Iterator[dict[str, Any]]",
+          "exported": true,
+          "lineCount": 37
+        },
+        {
+          "name": "main",
+          "params": [],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "random",
+          "specifiers": [
+            "random"
+          ]
+        },
+        {
+          "source": "collections.abc",
+          "specifiers": [
+            "Iterator"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        }
+      ],
+      "exports": [
+        "opt",
+        "rec",
+        "multinli",
+        "boolq",
+        "banking77",
+        "agnews",
+        "sst5",
+        "programmatic_policies",
+        "routing",
+        "main"
+      ],
+      "totalLines": 260,
+      "hasStructuralAnalysis": true
+    },
+    "src/local_decision_model/evaluate.py": {
+      "filePath": "src/local_decision_model/evaluate.py",
+      "contentHash": "d064d9e6bd556be7ae53901dcc1f0b11a87609a1d7fb8d63ee5c869dba18ad63",
+      "functions": [
+        {
+          "name": "query",
+          "params": [
+            "rec"
+          ],
+          "returnType": "tuple[str, float]",
+          "exported": true,
+          "lineCount": 21
+        },
+        {
+          "name": "main",
+          "params": [],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 48
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        },
+        {
+          "source": "urllib.request",
+          "specifiers": [
+            "urllib.request"
+          ]
+        },
+        {
+          "source": "collections",
+          "specifiers": [
+            "defaultdict"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        },
+        {
+          "source": "structlog",
+          "specifiers": [
+            "structlog"
+          ]
+        }
+      ],
+      "exports": [
+        "query",
+        "main"
+      ],
+      "totalLines": 104,
+      "hasStructuralAnalysis": true
+    },
+    "src/local_decision_model/py.typed": {
+      "filePath": "src/local_decision_model/py.typed",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1,
+      "hasStructuralAnalysis": false
+    },
+    "src/local_decision_model/to_mlx_chat.py": {
+      "filePath": "src/local_decision_model/to_mlx_chat.py",
+      "contentHash": "331d82c0904c660ce972d9e5cd4bb9ed5f39dedc9f33ad43a014463d996e195c",
+      "functions": [
+        {
+          "name": "format_options",
+          "params": [
+            "options"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "to_example",
+          "params": [
+            "rec"
+          ],
+          "returnType": "dict[str, Any]",
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "main",
+          "params": [
+            "src_dir",
+            "dst_dir"
+          ],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Any"
+          ]
+        }
+      ],
+      "exports": [
+        "format_options",
+        "to_example",
+        "main"
+      ],
+      "totalLines": 61,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_pipeline.py": {
+      "filePath": "tests/test_pipeline.py",
+      "contentHash": "d050b04418c9ef86a82d3011224c8c7efb360a6fea833fa8e8e1caf239f31356",
+      "functions": [
+        {
+          "name": "test_opt_record_shape",
+          "params": [],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "test_programmatic_policies_schema_and_answer_validity",
+          "params": [],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "test_programmatic_policies_respects_damage_override",
+          "params": [],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "test_routing_schema_and_labels",
+          "params": [],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "test_to_example_bakes_system_prompt_and_contract",
+          "params": [],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "test_format_options_rendering",
+          "params": [],
+          "returnType": "None",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "random",
+          "specifiers": [
+            "random"
+          ]
+        },
+        {
+          "source": "local_decision_model.build_dataset",
+          "specifiers": [
+            "opt",
+            "programmatic_policies",
+            "rec",
+            "routing"
+          ]
+        },
+        {
+          "source": "local_decision_model.to_mlx_chat",
+          "specifiers": [
+            "SYSTEM_PROMPT",
+            "format_options",
+            "to_example"
+          ]
+        }
+      ],
+      "exports": [
+        "test_opt_record_shape",
+        "test_programmatic_policies_schema_and_answer_validity",
+        "test_programmatic_policies_respects_damage_override",
+        "test_routing_schema_and_labels",
+        "test_to_example_bakes_system_prompt_and_contract",
+        "test_format_options_rendering"
+      ],
+      "totalLines": 80,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

@@ -1,0 +1,1176 @@
+{
+ "version": "1.0.0",
+ "project": {
+  "name": "local-decision-model-mlx",
+  "languages": [
+   "python",
+   "markdown",
+   "yaml",
+   "toml",
+   "shell",
+   "makefile"
+  ],
+  "frameworks": [
+   "pytest",
+   "mlx-lm",
+   "structlog"
+  ],
+  "description": "Train your own Jev-style decision classifier fully locally on Apple Silicon (MLX): build a classification dataset, LoRA fine-tune a 4B model, serve an OpenAI-compatible endpoint, and evaluate per-source accuracy.",
+  "analyzedAt": "2026-10-04T14:11:19.146703+00:00",
+  "gitCommitHash": "7c7012d66b34716c64b019401cf6603759649852"
+ },
+ "nodes": [
+  {
+   "id": "pipeline:.github/workflows/ci.yml",
+   "type": "pipeline",
+   "name": "CI",
+   "summary": "GitHub Actions workflow running all quality gates on push/PR: ruff lint, black/isort format check, mypy strict, bandit security scan, pip-audit dependency audit, and pytest with 80% coverage floor.",
+   "tags": [
+    "ci-cd",
+    "deployment",
+    "quality-gates"
+   ],
+   "complexity": "moderate",
+   "filePath": ".github/workflows/ci.yml"
+  },
+  {
+   "id": "config:pyproject.toml",
+   "type": "config",
+   "name": "pyproject.toml",
+   "summary": "Python project manifest: src-layout package definition, optional [data]/[dev] extras, and tool configuration for ruff (incl. security rules), black, mypy --strict, bandit, and pytest.",
+   "tags": [
+    "configuration",
+    "build-system",
+    "quality-gates"
+   ],
+   "complexity": "moderate",
+   "filePath": "pyproject.toml"
+  },
+  {
+   "id": "config:.pre-commit-config.yaml",
+   "type": "config",
+   "name": ".pre-commit-config.yaml",
+   "summary": "Pre-commit hooks enforcing Conventional Commits and code quality checks before each commit.",
+   "tags": [
+    "configuration",
+    "quality-gates"
+   ],
+   "complexity": "simple",
+   "filePath": ".pre-commit-config.yaml"
+  },
+  {
+   "id": "config:requirements.txt",
+   "type": "config",
+   "name": "requirements.txt",
+   "summary": "Pinned dependency list used by the CI pip-audit gate.",
+   "tags": [
+    "configuration",
+    "dependencies"
+   ],
+   "complexity": "simple",
+   "filePath": "requirements.txt"
+  },
+  {
+   "id": "file:Makefile",
+   "type": "file",
+   "name": "Makefile",
+   "summary": "Single CLI for the whole pipeline: data, chat-format, train, serve, eval plus quality gates (check/lint/format/typecheck/security/test) and clean.",
+   "tags": [
+    "build-system",
+    "entry-point",
+    "data-pipeline"
+   ],
+   "complexity": "moderate",
+   "filePath": "Makefile"
+  },
+  {
+   "id": "document:README.md",
+   "type": "document",
+   "name": "README",
+   "summary": "Project overview: fully-local Jev-style decision classifier training on Apple Silicon with MLX; pipeline table, model contract, quick start, and LoRA-vs-full-FT rationale.",
+   "tags": [
+    "documentation",
+    "entry-point"
+   ],
+   "complexity": "moderate",
+   "filePath": "README.md"
+  },
+  {
+   "id": "document:AGENTS.md",
+   "type": "document",
+   "name": "AGENTS",
+   "summary": "Instructions for AI coding agents: model contract, quality-gate commands, conventions, pattern references, and known limitations.",
+   "tags": [
+    "documentation",
+    "agent-instructions"
+   ],
+   "complexity": "moderate",
+   "filePath": "AGENTS.md"
+  },
+  {
+   "id": "document:SECURITY.md",
+   "type": "document",
+   "name": "SECURITY",
+   "summary": "Security policy describing how to report vulnerabilities for the project.",
+   "tags": [
+    "documentation",
+    "security"
+   ],
+   "complexity": "simple",
+   "filePath": "SECURITY.md"
+  },
+  {
+   "id": "document:THREAT_MODEL.md",
+   "type": "document",
+   "name": "THREAT_MODEL",
+   "summary": "Threat model enumerating trust boundaries (dataset reads, localhost-only eval server) that justify the bandit/ruff security-rule skips.",
+   "tags": [
+    "documentation",
+    "security"
+   ],
+   "complexity": "moderate",
+   "filePath": "THREAT_MODEL.md"
+  },
+  {
+   "id": "document:.github/ISSUE_TEMPLATE/bug_report.md",
+   "type": "document",
+   "name": "bug_report.md",
+   "summary": "GitHub issue template for bug reports.",
+   "tags": [
+    "documentation"
+   ],
+   "complexity": "simple",
+   "filePath": ".github/ISSUE_TEMPLATE/bug_report.md"
+  },
+  {
+   "id": "document:.github/ISSUE_TEMPLATE/feature_request.md",
+   "type": "document",
+   "name": "feature_request.md",
+   "summary": "GitHub issue template for feature requests.",
+   "tags": [
+    "documentation"
+   ],
+   "complexity": "simple",
+   "filePath": ".github/ISSUE_TEMPLATE/feature_request.md"
+  },
+  {
+   "id": "document:.github/PULL_REQUEST_TEMPLATE.md",
+   "type": "document",
+   "name": "PULL_REQUEST_TEMPLATE.md",
+   "summary": "Pull request template guiding contributors through the quality-gate checklist.",
+   "tags": [
+    "documentation"
+   ],
+   "complexity": "simple",
+   "filePath": ".github/PULL_REQUEST_TEMPLATE.md"
+  },
+  {
+   "id": "config:.github/dependabot.yml",
+   "type": "config",
+   "name": "dependabot.yml",
+   "summary": "Dependabot configuration keeping GitHub Actions and pip dependencies up to date.",
+   "tags": [
+    "configuration"
+   ],
+   "complexity": "simple",
+   "filePath": ".github/dependabot.yml"
+  },
+  {
+   "id": "document:blog/linkedin-post.md",
+   "type": "document",
+   "name": "linkedin-post",
+   "summary": "LinkedIn announcement draft for the fully-local Jev training project.",
+   "tags": [
+    "documentation"
+   ],
+   "complexity": "simple",
+   "filePath": "blog/linkedin-post.md"
+  },
+  {
+   "id": "document:blog/local-jev-mac-mini.md",
+   "type": "document",
+   "name": "local-jev-mac-mini",
+   "summary": "Long-form blog post: training a Jev-style classifier on a Mac Mini M4 with MLX LoRA, step by step.",
+   "tags": [
+    "documentation"
+   ],
+   "complexity": "moderate",
+   "filePath": "blog/local-jev-mac-mini.md"
+  },
+  {
+   "id": "document:docs/adr/0001-mlx-lora-on-apple-silicon.md",
+   "type": "document",
+   "name": "ADR-0001",
+   "summary": "Architecture decision record: choose MLX LoRA fine-tuning on Apple Silicon over rented-cloud GPUs.",
+   "tags": [
+    "documentation"
+   ],
+   "complexity": "simple",
+   "filePath": "docs/adr/0001-mlx-lora-on-apple-silicon.md"
+  },
+  {
+   "id": "document:docs/adr/0002-unified-schema-and-baked-system-prompt.md",
+   "type": "document",
+   "name": "ADR-0002",
+   "summary": "Architecture decision record: unified record schema with the inference system prompt baked into training data to prevent train/serve drift.",
+   "tags": [
+    "documentation"
+   ],
+   "complexity": "simple",
+   "filePath": "docs/adr/0002-unified-schema-and-baked-system-prompt.md"
+  },
+  {
+   "id": "document:docs/design.md",
+   "type": "document",
+   "name": "design",
+   "summary": "Design doc stating intent, preconditions, and invariants for the training pipeline.",
+   "tags": [
+    "documentation"
+   ],
+   "complexity": "simple",
+   "filePath": "docs/design.md"
+  },
+  {
+   "id": "file:scripts/04_train.sh",
+   "type": "file",
+   "name": "04_train.sh",
+   "summary": "LoRA fine-tunes a 4B model via mlx_lm.lora (rank 32, ~4.7k iters) with env-overridable MODEL/ITERS/BATCH/LR/RANK; Apple Silicon only.",
+   "tags": [
+    "data-pipeline",
+    "training",
+    "script"
+   ],
+   "complexity": "simple",
+   "filePath": "scripts/04_train.sh"
+  },
+  {
+   "id": "file:scripts/05_fuse_serve.sh",
+   "type": "file",
+   "name": "05_fuse_serve.sh",
+   "summary": "Fuses the trained LoRA adapter into the base weights and serves an OpenAI-compatible endpoint on localhost:8080 via mlx_lm.server.",
+   "tags": [
+    "serving",
+    "deployment",
+    "script"
+   ],
+   "complexity": "simple",
+   "filePath": "scripts/05_fuse_serve.sh"
+  },
+  {
+   "id": "file:src/local_decision_model/__init__.py",
+   "type": "file",
+   "name": "__init__.py",
+   "summary": "Package marker for local_decision_model.",
+   "tags": [
+    "entry-point",
+    "barrel"
+   ],
+   "complexity": "simple",
+   "filePath": "src/local_decision_model/__init__.py"
+  },
+  {
+   "id": "file:src/local_decision_model/py.typed",
+   "type": "file",
+   "name": "py.typed",
+   "summary": "PEP 561 marker declaring the package is typed.",
+   "tags": [
+    "type-definition"
+   ],
+   "complexity": "simple",
+   "filePath": "src/local_decision_model/py.typed"
+  },
+  {
+   "id": "file:src/local_decision_model/build_dataset.py",
+   "type": "file",
+   "name": "build_dataset.py",
+   "summary": "Samples ~35k examples from HF datasets (MultiNLI, BoolQ, Banking77, AG News, SST-5) plus two synthetic generators into the unified Jev schema, writing train/dev JSONL splits.",
+   "tags": [
+    "data-pipeline",
+    "data-model",
+    "factory",
+    "tested"
+   ],
+   "complexity": "complex",
+   "filePath": "src/local_decision_model/build_dataset.py"
+  },
+  {
+   "id": "file:src/local_decision_model/evaluate.py",
+   "type": "file",
+   "name": "evaluate.py",
+   "summary": "Evaluates the served classifier on the held-out dev split, reporting per-source accuracy, malformed-output rate, and mean latency against the local OpenAI-compatible endpoint.",
+   "tags": [
+    "evaluation",
+    "api-handler",
+    "service",
+    "tested"
+   ],
+   "complexity": "moderate",
+   "filePath": "src/local_decision_model/evaluate.py"
+  },
+  {
+   "id": "file:src/local_decision_model/to_mlx_chat.py",
+   "type": "file",
+   "name": "to_mlx_chat.py",
+   "summary": "Converts unified JSONL to MLX chat format, baking the exact inference-time system prompt into every training example so training and serving cannot drift.",
+   "tags": [
+    "serialization",
+    "data-pipeline",
+    "tested"
+   ],
+   "complexity": "moderate",
+   "filePath": "src/local_decision_model/to_mlx_chat.py"
+  },
+  {
+   "id": "file:tests/test_pipeline.py",
+   "type": "file",
+   "name": "test_pipeline.py",
+   "summary": "Offline pytest suite: schema-shape checks for every dataset generator plus invariants that the chat converter bakes in the system prompt and contract.",
+   "tags": [
+    "test",
+    "validation"
+   ],
+   "complexity": "moderate",
+   "filePath": "tests/test_pipeline.py"
+  },
+  {
+   "id": "function:src/local_decision_model/build_dataset.py:rec",
+   "type": "function",
+   "name": "rec",
+   "summary": "Constructs one unified record with state, question, options, answer, and source fields.",
+   "tags": [
+    "data-model",
+    "factory"
+   ],
+   "complexity": "simple",
+   "filePath": "src/local_decision_model/build_dataset.py"
+  },
+  {
+   "id": "function:src/local_decision_model/build_dataset.py:multinli",
+   "type": "function",
+   "name": "multinli",
+   "summary": "Yields n three-way entailment records from shuffled MultiNLI with fixed options A/B/C.",
+   "tags": [
+    "data-pipeline",
+    "adapter"
+   ],
+   "complexity": "simple",
+   "filePath": "src/local_decision_model/build_dataset.py"
+  },
+  {
+   "id": "function:src/local_decision_model/build_dataset.py:boolq",
+   "type": "function",
+   "name": "boolq",
+   "summary": "Yields n binary yes/no reading-comprehension records from BoolQ.",
+   "tags": [
+    "data-pipeline",
+    "adapter"
+   ],
+   "complexity": "simple",
+   "filePath": "src/local_decision_model/build_dataset.py"
+  },
+  {
+   "id": "function:src/local_decision_model/build_dataset.py:banking77",
+   "type": "function",
+   "name": "banking77",
+   "summary": "Yields n 10-way banking-intent records, sampling 9 distractor intents per example from the 77-class label set.",
+   "tags": [
+    "data-pipeline",
+    "adapter"
+   ],
+   "complexity": "moderate",
+   "filePath": "src/local_decision_model/build_dataset.py"
+  },
+  {
+   "id": "function:src/local_decision_model/build_dataset.py:agnews",
+   "type": "function",
+   "name": "agnews",
+   "summary": "Yields n 4-way news-topic classification records from AG News with fixed options.",
+   "tags": [
+    "data-pipeline",
+    "adapter"
+   ],
+   "complexity": "simple",
+   "filePath": "src/local_decision_model/build_dataset.py"
+  },
+  {
+   "id": "function:src/local_decision_model/build_dataset.py:sst5",
+   "type": "function",
+   "name": "sst5",
+   "summary": "Yields n 5-way sentiment records from SST-5 with a fixed very-negative..very-positive option ladder.",
+   "tags": [
+    "data-pipeline",
+    "adapter"
+   ],
+   "complexity": "simple",
+   "filePath": "src/local_decision_model/build_dataset.py"
+  },
+  {
+   "id": "function:src/local_decision_model/build_dataset.py:programmatic_policies",
+   "type": "function",
+   "name": "programmatic_policies",
+   "summary": "Synthetic refund-policy gate generator: applies age tiers plus a damaged-item override to produce approve/review/deny answers with no download needed.",
+   "tags": [
+    "data-pipeline",
+    "synthetic-data"
+   ],
+   "complexity": "complex",
+   "filePath": "src/local_decision_model/build_dataset.py"
+  },
+  {
+   "id": "function:src/local_decision_model/build_dataset.py:routing",
+   "type": "function",
+   "name": "routing",
+   "summary": "Synthetic support-ticket generator routing sampled messages to one of four queues (billing/technical/account/sales).",
+   "tags": [
+    "data-pipeline",
+    "synthetic-data"
+   ],
+   "complexity": "moderate",
+   "filePath": "src/local_decision_model/build_dataset.py"
+  },
+  {
+   "id": "function:src/local_decision_model/build_dataset.py:main",
+   "type": "function",
+   "name": "main",
+   "summary": "Runs all BUILDERS with seed 42, shuffles, splits off a dev set, and writes train/dev JSONL under data/.",
+   "tags": [
+    "entry-point",
+    "data-pipeline"
+   ],
+   "complexity": "moderate",
+   "filePath": "src/local_decision_model/build_dataset.py"
+  },
+  {
+   "id": "function:src/local_decision_model/evaluate.py:query",
+   "type": "function",
+   "name": "query",
+   "summary": "Sends one decision task (temperature=0, max_tokens=8, baked system prompt) to the local server and returns raw output plus latency.",
+   "tags": [
+    "api-handler",
+    "service"
+   ],
+   "complexity": "moderate",
+   "filePath": "src/local_decision_model/evaluate.py"
+  },
+  {
+   "id": "function:src/local_decision_model/evaluate.py:main",
+   "type": "function",
+   "name": "main",
+   "summary": "Evaluates every dev record, computes per-source accuracy with lenient bare-letter fallback, and logs malformed rate and mean latency.",
+   "tags": [
+    "entry-point",
+    "evaluation"
+   ],
+   "complexity": "moderate",
+   "filePath": "src/local_decision_model/evaluate.py"
+  },
+  {
+   "id": "function:src/local_decision_model/to_mlx_chat.py:format_options",
+   "type": "function",
+   "name": "format_options",
+   "summary": "Renders options as a numbered 'LABEL. key - description' block shared by training and serving prompt construction.",
+   "tags": [
+    "utility",
+    "serialization"
+   ],
+   "complexity": "simple",
+   "filePath": "src/local_decision_model/to_mlx_chat.py"
+  },
+  {
+   "id": "function:src/local_decision_model/to_mlx_chat.py:to_example",
+   "type": "function",
+   "name": "to_example",
+   "summary": "Converts one unified record to an MLX chat example whose assistant reply is exactly {label, key} JSON.",
+   "tags": [
+    "serialization",
+    "data-model"
+   ],
+   "complexity": "moderate",
+   "filePath": "src/local_decision_model/to_mlx_chat.py"
+  },
+  {
+   "id": "function:src/local_decision_model/to_mlx_chat.py:main",
+   "type": "function",
+   "name": "main",
+   "summary": "Converts train/dev splits from unified to MLX chat JSONL in the destination directory.",
+   "tags": [
+    "entry-point",
+    "data-pipeline"
+   ],
+   "complexity": "simple",
+   "filePath": "src/local_decision_model/to_mlx_chat.py"
+  },
+  {
+   "id": "function:tests/test_pipeline.py:test_opt_record_shape",
+   "type": "function",
+   "name": "test_opt_record_shape",
+   "summary": "Verifies the option-record helper returns label/key/description fields.",
+   "tags": [
+    "test",
+    "validation"
+   ],
+   "complexity": "simple",
+   "filePath": "tests/test_pipeline.py"
+  },
+  {
+   "id": "function:tests/test_pipeline.py:test_programmatic_policies_schema_and_answer_validity",
+   "type": "function",
+   "name": "test_programmatic_policies_schema_and_answer_validity",
+   "summary": "Asserts policy-generator records match the unified schema and answers are one of the offered option keys.",
+   "tags": [
+    "test",
+    "validation"
+   ],
+   "complexity": "moderate",
+   "filePath": "tests/test_pipeline.py"
+  },
+  {
+   "id": "function:tests/test_pipeline.py:test_programmatic_policies_respects_damage_override",
+   "type": "function",
+   "name": "test_programmatic_policies_respects_damage_override",
+   "summary": "Verifies the damaged-item override always yields approve regardless of purchase age.",
+   "tags": [
+    "test",
+    "validation"
+   ],
+   "complexity": "moderate",
+   "filePath": "tests/test_pipeline.py"
+  },
+  {
+   "id": "function:tests/test_pipeline.py:test_routing_schema_and_labels",
+   "type": "function",
+   "name": "test_routing_schema_and_labels",
+   "summary": "Asserts routing-generator records match the schema and labels are valid queue keys.",
+   "tags": [
+    "test",
+    "validation"
+   ],
+   "complexity": "moderate",
+   "filePath": "tests/test_pipeline.py"
+  },
+  {
+   "id": "function:tests/test_pipeline.py:test_to_example_bakes_system_prompt_and_contract",
+   "type": "function",
+   "name": "test_to_example_bakes_system_prompt_and_contract",
+   "summary": "Verifies chat conversion bakes the inference system prompt and emits exact {label, key} assistant JSON.",
+   "tags": [
+    "test",
+    "validation"
+   ],
+   "complexity": "moderate",
+   "filePath": "tests/test_pipeline.py"
+  },
+  {
+   "id": "function:tests/test_pipeline.py:test_format_options_rendering",
+   "type": "function",
+   "name": "test_format_options_rendering",
+   "summary": "Verifies the options block renders as 'LABEL. key - description' lines.",
+   "tags": [
+    "test",
+    "validation"
+   ],
+   "complexity": "simple",
+   "filePath": "tests/test_pipeline.py"
+  }
+ ],
+ "edges": [
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "config:pyproject.toml",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "file:tests/test_pipeline.py",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "config:requirements.txt",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:pyproject.toml",
+   "target": "file:src/local_decision_model/build_dataset.py",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:pyproject.toml",
+   "target": "file:src/local_decision_model/evaluate.py",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:pyproject.toml",
+   "target": "file:src/local_decision_model/to_mlx_chat.py",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:pyproject.toml",
+   "target": "file:tests/test_pipeline.py",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:.pre-commit-config.yaml",
+   "target": "file:src/local_decision_model/build_dataset.py",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:Makefile",
+   "target": "file:src/local_decision_model/build_dataset.py",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:Makefile",
+   "target": "file:src/local_decision_model/to_mlx_chat.py",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:Makefile",
+   "target": "file:src/local_decision_model/evaluate.py",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:Makefile",
+   "target": "file:scripts/04_train.sh",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:Makefile",
+   "target": "file:scripts/05_fuse_serve.sh",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "document:README.md",
+   "target": "file:src/local_decision_model/build_dataset.py",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:README.md",
+   "target": "file:src/local_decision_model/evaluate.py",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:README.md",
+   "target": "file:scripts/04_train.sh",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:AGENTS.md",
+   "target": "config:pyproject.toml",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:THREAT_MODEL.md",
+   "target": "config:pyproject.toml",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "config:requirements.txt",
+   "target": "config:pyproject.toml",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "function:src/local_decision_model/build_dataset.py:rec",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "function:src/local_decision_model/build_dataset.py:multinli",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "function:src/local_decision_model/build_dataset.py:boolq",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "function:src/local_decision_model/build_dataset.py:banking77",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "function:src/local_decision_model/build_dataset.py:agnews",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "function:src/local_decision_model/build_dataset.py:sst5",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "function:src/local_decision_model/build_dataset.py:programmatic_policies",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "function:src/local_decision_model/build_dataset.py:routing",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "function:src/local_decision_model/build_dataset.py:main",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/evaluate.py",
+   "target": "function:src/local_decision_model/evaluate.py:query",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/evaluate.py",
+   "target": "function:src/local_decision_model/evaluate.py:main",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/to_mlx_chat.py",
+   "target": "function:src/local_decision_model/to_mlx_chat.py:format_options",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/to_mlx_chat.py",
+   "target": "function:src/local_decision_model/to_mlx_chat.py:to_example",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/to_mlx_chat.py",
+   "target": "function:src/local_decision_model/to_mlx_chat.py:main",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:tests/test_pipeline.py",
+   "target": "function:tests/test_pipeline.py:test_opt_record_shape",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:tests/test_pipeline.py",
+   "target": "function:tests/test_pipeline.py:test_programmatic_policies_schema_and_answer_validity",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:tests/test_pipeline.py",
+   "target": "function:tests/test_pipeline.py:test_programmatic_policies_respects_damage_override",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:tests/test_pipeline.py",
+   "target": "function:tests/test_pipeline.py:test_routing_schema_and_labels",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:tests/test_pipeline.py",
+   "target": "function:tests/test_pipeline.py:test_to_example_bakes_system_prompt_and_contract",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:tests/test_pipeline.py",
+   "target": "function:tests/test_pipeline.py:test_format_options_rendering",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "file:tests/test_pipeline.py",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:src/local_decision_model/to_mlx_chat.py",
+   "target": "file:tests/test_pipeline.py",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:src/local_decision_model/evaluate.py",
+   "target": "file:tests/test_pipeline.py",
+   "type": "tested_by",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:src/local_decision_model/build_dataset.py",
+   "target": "file:src/local_decision_model/to_mlx_chat.py",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "document:blog/local-jev-mac-mini.md",
+   "target": "file:src/local_decision_model/build_dataset.py",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:blog/local-jev-mac-mini.md",
+   "target": "file:scripts/04_train.sh",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/adr/0001-mlx-lora-on-apple-silicon.md",
+   "target": "file:scripts/04_train.sh",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/adr/0002-unified-schema-and-baked-system-prompt.md",
+   "target": "file:src/local_decision_model/to_mlx_chat.py",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/design.md",
+   "target": "file:src/local_decision_model/build_dataset.py",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:scripts/05_fuse_serve.sh",
+   "target": "file:scripts/04_train.sh",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/local_decision_model/evaluate.py",
+   "target": "file:scripts/05_fuse_serve.sh",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "function:src/local_decision_model/build_dataset.py:main",
+   "target": "function:src/local_decision_model/build_dataset.py:multinli",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/local_decision_model/build_dataset.py:main",
+   "target": "function:src/local_decision_model/build_dataset.py:programmatic_policies",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/local_decision_model/build_dataset.py:main",
+   "target": "function:src/local_decision_model/build_dataset.py:routing",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/local_decision_model/evaluate.py:main",
+   "target": "function:src/local_decision_model/evaluate.py:query",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:src/local_decision_model/to_mlx_chat.py:to_example",
+   "target": "function:src/local_decision_model/to_mlx_chat.py:format_options",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "document:SECURITY.md",
+   "target": "document:THREAT_MODEL.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:blog/linkedin-post.md",
+   "target": "document:blog/local-jev-mac-mini.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:.github/PULL_REQUEST_TEMPLATE.md",
+   "target": "pipeline:.github/workflows/ci.yml",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "config:.github/dependabot.yml",
+   "target": "config:requirements.txt",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:src/local_decision_model/__init__.py",
+   "target": "file:src/local_decision_model/build_dataset.py",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:src/local_decision_model/py.typed",
+   "target": "file:src/local_decision_model/__init__.py",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:.github/ISSUE_TEMPLATE/bug_report.md",
+   "target": "document:.github/PULL_REQUEST_TEMPLATE.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:.github/ISSUE_TEMPLATE/feature_request.md",
+   "target": "document:.github/PULL_REQUEST_TEMPLATE.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  }
+ ],
+ "layers": [
+  {
+   "id": "layer:ml-pipeline",
+   "name": "ML Pipeline",
+   "description": "End-to-end pipeline orchestration and Mac-side training/serving steps: dataset build entry, chat conversion, LoRA training, fuse+serve.",
+   "nodeIds": [
+    "file:Makefile",
+    "file:scripts/04_train.sh",
+    "file:scripts/05_fuse_serve.sh",
+    "file:src/local_decision_model/build_dataset.py",
+    "file:src/local_decision_model/to_mlx_chat.py",
+    "file:src/local_decision_model/evaluate.py"
+   ]
+  },
+  {
+   "id": "layer:package-core",
+   "name": "Package Core",
+   "description": "Package identity markers for the local_decision_model Python package.",
+   "nodeIds": [
+    "file:src/local_decision_model/__init__.py",
+    "file:src/local_decision_model/py.typed"
+   ]
+  },
+  {
+   "id": "layer:quality-gates",
+   "name": "Quality Gates & Configuration",
+   "description": "CI pipeline plus the tool configuration that defines lint, format, type, security, and dependency-audit gates.",
+   "nodeIds": [
+    "pipeline:.github/workflows/ci.yml",
+    "config:pyproject.toml",
+    "config:.pre-commit-config.yaml",
+    "config:requirements.txt",
+    "config:.github/dependabot.yml"
+   ]
+  },
+  {
+   "id": "layer:tests",
+   "name": "Tests",
+   "description": "Offline pytest suite validating dataset generators and the chat converter contract.",
+   "nodeIds": [
+    "file:tests/test_pipeline.py"
+   ]
+  },
+  {
+   "id": "layer:documentation",
+   "name": "Documentation",
+   "description": "Project docs: overview, agent instructions, security policy and threat model, design doc, ADRs, blog posts, and GitHub templates.",
+   "nodeIds": [
+    "document:README.md",
+    "document:AGENTS.md",
+    "document:SECURITY.md",
+    "document:THREAT_MODEL.md",
+    "document:docs/design.md",
+    "document:docs/adr/0001-mlx-lora-on-apple-silicon.md",
+    "document:docs/adr/0002-unified-schema-and-baked-system-prompt.md",
+    "document:blog/local-jev-mac-mini.md",
+    "document:blog/linkedin-post.md",
+    "document:.github/PULL_REQUEST_TEMPLATE.md",
+    "document:.github/ISSUE_TEMPLATE/bug_report.md",
+    "document:.github/ISSUE_TEMPLATE/feature_request.md"
+   ]
+  }
+ ],
+ "tour": [
+  {
+   "order": 1,
+   "title": "Project Overview",
+   "description": "Start with the README: what a Jev-style decision classifier is, the fully-local MLX pipeline (data -> chat-format -> train -> serve -> eval), and the strict model contract (output exactly {\"label\", \"key\"}).",
+   "nodeIds": [
+    "document:README.md"
+   ]
+  },
+  {
+   "order": 2,
+   "title": "Design Intent & Decisions",
+   "description": "Read the design doc and the two ADRs to understand why MLX LoRA on Apple Silicon and why the system prompt is baked into training data (no train/serve drift).",
+   "nodeIds": [
+    "document:docs/design.md",
+    "document:docs/adr/0001-mlx-lora-on-apple-silicon.md",
+    "document:docs/adr/0002-unified-schema-and-baked-system-prompt.md"
+   ]
+  },
+  {
+   "order": 3,
+   "title": "Pipeline Entry Point",
+   "description": "The Makefile is the single CLI: make data, chat-format, train, serve, eval, plus the check quality gate that fans out to lint/type/security/test.",
+   "nodeIds": [
+    "file:Makefile"
+   ]
+  },
+  {
+   "order": 4,
+   "title": "Dataset Construction",
+   "description": "build_dataset.py samples ~35k examples: five HF dataset adapters (multinli, boolq, banking77, agnews, sst5) plus two synthetic generators (programmatic_policies, routing), all normalized through rec() into the unified schema and written to train/dev JSONL by main().",
+   "nodeIds": [
+    "file:src/local_decision_model/build_dataset.py",
+    "function:src/local_decision_model/build_dataset.py:main",
+    "function:src/local_decision_model/build_dataset.py:programmatic_policies"
+   ]
+  },
+  {
+   "order": 5,
+   "title": "Chat-Format Conversion",
+   "description": "to_mlx_chat.py converts unified records to MLX chat JSONL. The key invariant: to_example bakes the exact inference system prompt into every training example, and the assistant reply is exactly {\"label\", \"key\"}.",
+   "nodeIds": [
+    "file:src/local_decision_model/to_mlx_chat.py",
+    "function:src/local_decision_model/to_mlx_chat.py:to_example",
+    "function:src/local_decision_model/to_mlx_chat.py:format_options"
+   ]
+  },
+  {
+   "order": 6,
+   "title": "Training & Serving on the Mac",
+   "description": "Two thin shell scripts wrap mlx-lm: 04_train.sh LoRA fine-tunes (rank 32, ~4.7k iters, env-overridable), 05_fuse_serve.sh fuses the adapter and serves an OpenAI-compatible endpoint on localhost:8080.",
+   "nodeIds": [
+    "file:scripts/04_train.sh",
+    "file:scripts/05_fuse_serve.sh"
+   ]
+  },
+  {
+   "order": 7,
+   "title": "Evaluation",
+   "description": "evaluate.py queries the local server for every dev record (temperature=0, max_tokens=8), scores per-source accuracy with a lenient bare-letter fallback, and reports malformed-output rate and mean latency.",
+   "nodeIds": [
+    "file:src/local_decision_model/evaluate.py",
+    "function:src/local_decision_model/evaluate.py:query",
+    "function:src/local_decision_model/evaluate.py:main"
+   ]
+  },
+  {
+   "order": 8,
+   "title": "Tests",
+   "description": "tests/test_pipeline.py is fully offline: schema-shape checks for every generator, the damaged-item policy override invariant, and the system-prompt/contract invariants of the chat converter.",
+   "nodeIds": [
+    "file:tests/test_pipeline.py",
+    "function:tests/test_pipeline.py:test_to_example_bakes_system_prompt_and_contract"
+   ]
+  },
+  {
+   "order": 9,
+   "title": "Quality Gates",
+   "description": "pyproject.toml configures ruff (incl. security rules), black, mypy --strict, and bandit; .github/workflows/ci.yml runs them all plus pip-audit and a 80% coverage floor on every push.",
+   "nodeIds": [
+    "config:pyproject.toml",
+    "pipeline:.github/workflows/ci.yml"
+   ]
+  },
+  {
+   "order": 10,
+   "title": "Security Posture",
+   "description": "THREAT_MODEL.md documents the trust boundaries (canonical public HF reads, localhost-only eval server) that justify the documented security-rule skips.",
+   "nodeIds": [
+    "document:THREAT_MODEL.md",
+    "document:SECURITY.md"
+   ]
+  }
+ ]
+}
