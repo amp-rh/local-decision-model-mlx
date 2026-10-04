@@ -36,6 +36,12 @@ Full FT of a 4B model needs ~16–20 bytes/param (weights + gradients + AdamW fp
 
 ## Notes
 
+- `blog/` contains the article and LinkedIn teaser this repo backs — numbers there are pre-run estimates until the pipeline has been executed end-to-end; update them with measured results.
 - `data/`, `adapters/`, `model/` are gitignored — only code is versioned.
 - Dataset proportions live in `scripts/02_build_dataset.py` (`BUILDERS` dict); swap in your own domain mix there.
 - The dev split doubles as the eval set; keep it held out from training.
+- Data build needs `pip install datasets` on a networked machine; training needs `pip install mlx-lm` on Apple Silicon.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Original recipe by Together AI ([blog post](https://www.together.ai/blog/how-to-train-your-own-jev)); the local MLX pipeline is what's added here.
