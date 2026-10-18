@@ -7,5 +7,5 @@ mypy==2.4.0
 pip-audit==2.10.1
 pytest==9.0.3
 pytest-cov==7.1.0
-ruff==0.16.10
+ruff==0.17.1
 structlog==26.1.0
